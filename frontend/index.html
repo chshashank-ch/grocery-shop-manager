@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Ramu's Ledger">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Ramu's Ledger — Shop Manager</title>
+
+  <!-- Google Fonts: Fraunces & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l1.5-5h15L21 9"/><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9z"/><path d="M9 13a3 3 0 0 0 6 0"/>
+      </svg>
+    </div>
+    <h1>Ramu's Ledger</h1>
+    <p class="sub">Sign in to manage today's stock, counter sales, and the shop's accounts.</p>
+
+    <div class="field">
+      <label>Username</label>
+      <input id="loginUser" autocomplete="username" placeholder="Enter username (e.g. ramu)">
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input id="loginPass" type="password" autocomplete="current-password" placeholder="Enter password">
+    </div>
+
+    <p class="login-error" id="loginError">That username and password don't match.</p>
+
+    <button class="btn btn-primary" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Sign in to Ledger
+    </button>
+
+    <div class="login-hint">
+      Default owner login: <b>ramu</b> / <b>admin 123</b>.<br>
+      Staff accounts can be created from the Settings tab once you sign in.
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="app">
+  <div class="shell">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l1.5-5h15L21 9"/><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9z"/><path d="M9 13a3 3 0 0 0 6 0"/>
+          </svg>
+        </div>
+        <div>
+          <div class="name">Ramu's Ledger</div>
+          <div class="sub">Kirana Shop Manager</div>
+        </div>
+      </div>
+
+      <nav class="navlist" id="navlist">
+        <button class="navlink active" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/>
+            <rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>
+          </svg>
+          <span class="label">Dashboard</span>
+        </button>
+
+        <button class="navlink" data-page="addItem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7l1-3h14l1 3"/><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.2"/>
+          </svg>
+          <span class="label">Add Stock Item</span>
+        </button>
+
+        <button class="navlink" data-page="inventory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M20 7l-8-4-8 4 8 4 8-4z"/><path d="M4 7v10l8 4 8-4V7"/><path d="M12 11v10"/>
+          </svg>
+          <span class="label">Inventory</span>
+        </button>
+
+        <button class="navlink" data-page="history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l4 2"/>
+          </svg>
+          <span class="label">Entry History</span>
+        </button>
+
+        <button class="navlink" data-page="sales">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-4"/>
+          </svg>
+          <span class="label">Counter Sales</span>
+        </button>
+
+        <button class="navlink" data-page="reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 19h16"/><path d="M7 19V9M12 19V5M17 19v-7"/>
+          </svg>
+          <span class="label">Monthly Reports</span>
+        </button>
+
+        <button class="navlink" data-page="advisor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="label">AI Advisor</span>
+        </button>
+
+        <button class="navlink" data-page="calculator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2"/>
+            <path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+          </svg>
+          <span class="label">Calculator</span>
+        </button>
+
+        <button class="navlink" data-page="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span class="label">Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="profile-mini">
+          <div id="sideAvatarFallback" class="avatar-fallback">R</div>
+          <div>
+            <div class="who" id="sideUsername">ramu</div>
+            <div class="role">Shop Owner</div>
+          </div>
+        </div>
+        <button class="btn btn-ghost logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> <span>Sign out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+
+      <!-- PAGE: DASHBOARD -->
+      <section class="page active" id="page-dashboard">
+        <div class="topline">
+          <h1>Today at the Shop</h1>
+          <div class="today" id="todayLabel"></div>
+        </div>
+
+        <div id="lowStockBanner" style="display:none;" class="low-stock-banner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>
+          </svg>
+          <span id="lowStockText"></span>
+        </div>
+
+        <div class="grid grid-4" style="margin-bottom:22px;">
+          <div class="stat">
+            <div class="label">Item Types Stocked</div>
+            <div class="value" id="statTypes">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Total Stock Units</div>
+            <div class="value" id="statUnits">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Stock Valuation (Cost)</div>
+            <div class="value" id="statCost">₹0</div>
+          </div>
+          <div class="stat">
+            <div class="label">This Month's Profit/Loss</div>
+            <div class="value" id="statProfit">₹0</div>
+            <div class="delta" id="statProfitDelta"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="section-title">
+              <span>Recently Added Items</span>
+              <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px;" data-page="history">View History</button>
+            </div>
+            <div id="dashRecent"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">
+              <span>Top Stock by Capital Value</span>
+              <button class="btn btn-ghost" style="padding:6px 12px;font-size:12px;" data-page="inventory">All Stock</button>
+            </div>
+            <div id="dashTop"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: ADD ITEM -->
+      <section class="page" id="page-addItem">
+        <div class="topline">
+          <h1>Add Stock Item</h1>
+          <div class="today">Capture photo, name it, enter price — inventory merges automatically.</div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <label class="photo-box" id="photoBox">
+              <img id="photoPreview" style="display:none;" alt="Preview">
+              <svg id="photoIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7l1-3h14l1 3"/><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.2"/>
+              </svg>
+              <div class="hint" id="photoHint">Tap to take photo or choose item image (optional)</div>
+              <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none;">
+            </label>
+            <div style="margin-top:10px; text-align:center;">
+              <button class="btn btn-ghost" id="clearPhotoBtn" style="display:none;font-size:12.5px;padding:6px 12px;">Remove Photo</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="field">
+              <label>Item Name</label>
+              <input id="itemName" placeholder="e.g. Toor Dal, Amul Butter, Red Onions">
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label>Quantity</label>
+                <input id="itemQty" type="number" min="0" step="any" placeholder="e.g. 10">
+              </div>
+              <div class="field">
+                <label>Cost Price Per Unit (₹)</label>
+                <input id="itemPrice" type="number" min="0" step="any" placeholder="e.g. 140">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label>Category</label>
+                <select id="itemCategory" class="field-select">
+                  <option>Groceries</option>
+                  <option>Dairy</option>
+                  <option>Vegetables &amp; Fruits</option>
+                  <option>Snacks</option>
+                  <option>Beverages</option>
+                  <option>Household</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Low Stock Alert Below (Units)</label>
+                <input id="itemThreshold" type="number" min="0" step="any" placeholder="Default: 5">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Total Entry Cost</label>
+              <div style="padding:12px 14px; border-radius:10px; background:var(--surface); border:1px solid var(--border); font-family:'Fraunces',serif; font-size:22px; font-weight:600;" id="itemTotalPreview">₹0.00</div>
+            </div>
+
+            <p class="muted" style="font-size:12.5px; margin:-4px 0 16px;" id="matchHint"></p>
+
+            <button class="btn btn-primary" id="saveItemBtn">
+              <i class="fas fa-check-circle"></i> Save to Ledger
+            </button>
+            <p id="saveMsg" style="font-size:12.5px; color:var(--green); margin-top:10px; display:none;">Saved and merged into inventory successfully!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: INVENTORY -->
+      <section class="page" id="page-inventory">
+        <div class="topline">
+          <h1>Stock Inventory</h1>
+          <div class="today">All active goods, auto-merged and tracked with live stock health.</div>
+        </div>
+        <div class="card">
+          <div id="inventoryTable"></div>
+        </div>
+      </section>
+
+      <!-- PAGE: HISTORY -->
+      <section class="page" id="page-history">
+        <div class="topline">
+          <h1>Entry History</h1>
+          <div class="today">Chronological log of every item purchase with timestamps and bill receipt print.</div>
+          <button class="btn btn-ghost" id="printTodayBtn" style="font-size:12.5px;padding:8px 14px;">
+            <i class="fas fa-print"></i> Print Today's Stock Bill
+          </button>
+        </div>
+        <div class="card">
+          <div id="historyTable"></div>
+        </div>
+      </section>
+
+      <!-- PAGE: SALES -->
+      <section class="page" id="page-sales">
+        <div class="topline">
+          <h1>Counter Sales</h1>
+          <div class="today">Log daily cash &amp; UPI collections to calculate profit and loss accurately.</div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="section-title">Log Today's Sale</div>
+            <div class="field">
+              <label>Amount Received (₹)</label>
+              <input id="saleAmount" type="number" min="0" step="any" placeholder="e.g. 4500">
+            </div>
+            <div class="field">
+              <label>Note / Payment Description (Optional)</label>
+              <input id="saleNote" placeholder="e.g. Counter evening cash & UPI">
+            </div>
+            <button class="btn btn-clay" id="saveSaleBtn">
+              <i class="fas fa-cash-register"></i> Record Counter Sale
+            </button>
+            <p id="saleMsg" style="font-size:12.5px; color:var(--green); margin-top:10px; display:none;">Sale recorded in ledger.</p>
+          </div>
+
+          <div class="card">
+            <div class="section-title">
+              <span>Sales Log</span>
+              <div style="display:flex;gap:6px;">
+                <button class="btn btn-primary" id="salesTabDaily" style="padding:6px 12px;font-size:12px;">Daily</button>
+                <button class="btn btn-ghost" id="salesTabMonthly" style="padding:6px 12px;font-size:12px;">Monthly</button>
+              </div>
+            </div>
+            <div id="salesTable"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: REPORTS -->
+      <section class="page" id="page-reports">
+        <div class="topline">
+          <h1>Monthly Performance Reports</h1>
+          <div class="today">Compare your stock spending against sales revenue month by month.</div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="section-title">Stock Purchasing Cost by Month</div>
+            <div id="reportExpenses"></div>
+          </div>
+          <div class="card">
+            <div class="section-title">Sales Revenue by Month</div>
+            <div id="reportSales"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:16px;">
+          <div class="card">
+            <div class="section-title">Net Profit / Loss Trend</div>
+            <div id="reportPL"></div>
+          </div>
+          <div class="card">
+            <div class="section-title">Spend by Product Category</div>
+            <div id="reportCategory"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: AI ADVISOR -->
+      <section class="page" id="page-advisor">
+        <div class="topline">
+          <h1>Kirana Business AI Advisor</h1>
+          <div class="today">Real-time financial &amp; reordering advice grounded directly in your shop data.</div>
+        </div>
+
+        <div class="card chat-wrap">
+          <div class="chat-suggest" id="chatSuggest"></div>
+          <div class="chat-log" id="chatLog"></div>
+          <div class="chat-input-row">
+            <input id="chatInput" placeholder="Ask e.g. 'How can I reduce losses?' or 'Which items to reorder?'">
+            <button class="btn btn-primary" id="chatSendBtn" style="padding:12px 20px;">
+              <i class="fas fa-paper-plane"></i> Ask
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: CALCULATOR -->
+      <section class="page" id="page-calculator">
+        <div class="topline">
+          <h1>Shop Counter Calculator</h1>
+          <div class="today">Instant counter arithmetic, customer change calculation, and bulk estimates.</div>
+        </div>
+
+        <div class="calc">
+          <div class="calc-screen">
+            <div class="expr" id="calcExpr">&nbsp;</div>
+            <div class="val" id="calcVal">0</div>
+          </div>
+          <div class="calc-grid" id="calcGrid"></div>
+        </div>
+      </section>
+
+      <!-- PAGE: SETTINGS -->
+      <section class="page" id="page-settings">
+        <div class="topline">
+          <h1>Shop Settings &amp; Accounts</h1>
+          <div class="today">Change sign-in password and configure staff worker logins.</div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="section-title">Change Password &amp; Username</div>
+            <div class="field">
+              <label>Current Password</label>
+              <input id="curPass" type="password" placeholder="Enter current password">
+            </div>
+            <div class="field">
+              <label>New Username (Optional)</label>
+              <input id="newUser" placeholder="Leave blank to keep current">
+            </div>
+            <div class="field">
+              <label>New Password (Optional)</label>
+              <input id="newPass" type="password" placeholder="Leave blank to keep current">
+            </div>
+            <button class="btn btn-primary" id="saveSettingsBtn">
+              <i class="fas fa-save"></i> Save Credentials
+            </button>
+            <p id="settingsMsg" style="font-size:12.5px; margin-top:10px; display:none;"></p>
+          </div>
+
+          <div class="card" id="staffCard">
+            <div class="section-title">Staff Worker Accounts</div>
+            <p class="muted" style="font-size:12.5px; margin-top:0;">Staff accounts can log sales and add stock, but cannot delete records or manage other staff.</p>
+            <div id="staffList"></div>
+            <div class="form-row" style="margin-top:14px;">
+              <div class="field">
+                <label>Staff Username</label>
+                <input id="staffUser" placeholder="e.g. suresh">
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input id="staffPass" placeholder="Set a password">
+              </div>
+            </div>
+            <button class="btn btn-clay" id="addStaffBtn">
+              <i class="fas fa-user-plus"></i> Add Staff Account
+            </button>
+            <p id="staffMsg" style="font-size:12.5px; margin-top:10px; display:none;"></p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Toast notification banner -->
+<div class="toast" id="toast"></div>
+
+<!-- Print Receipt Hidden Area -->
+<div id="printArea">
+  <div class="receipt" id="receiptContent"></div>
+</div>
+
+<!-- Scripts -->
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
